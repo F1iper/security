@@ -1,6 +1,5 @@
 package com.security.config;
 
-import org.springframework.cglib.proxy.NoOp;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -25,24 +24,6 @@ public class ProjectSecurityConfig {
         return http.build();
     }
 
-    //approach #1 withDefaultPasswordEncoder
-    /* @Bean
-    public InMemoryUserDetailsManager userDetailsService() {
-        UserDetails admin = User.withDefaultPasswordEncoder()
-                .username("admin")
-                .password("admin")
-                .authorities("admin")
-                .build();
-
-        UserDetails user = User.withDefaultPasswordEncoder()
-                .username("user")
-                .password("user")
-                .authorities("read")
-                .build();
-
-        return new InMemoryUserDetailsManager(admin, user);
-    }*/
-
     // #2 approach with NoOpPasswordEncoder
     @Bean
     public InMemoryUserDetailsManager userDetailsService() {
@@ -63,5 +44,4 @@ public class ProjectSecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return NoOpPasswordEncoder.getInstance();
     }
-
 }
